@@ -2,14 +2,11 @@ import classes.*;
 import SetEnum.*;
 
 public class Main{
-    public static void Enter(){
-        System.out.println();
-    }
 
-    public static void main(String[] Args){
-        Hispanic Hispan = new Hispanic("Испанец", Nature.HONEST, Situasion.GOOD, Status.SIMPLE);
-        Friends Friends = new Friends("Товарищи", Nature.HONEST, Situasion.TROUBLE, Status.SIMPLE);
-        Robin Robin = new Robin(" Я ", Nature.HONEST, Situasion.GOOD, Status.MASTER);
+    public static void main(String[] Args) {
+        Hispanic Hispan = new Hispanic("Испанец", Nature.HONEST, Situasion.GOOD, Status.SIMPLE, Nationality.SPANISH, 170, 70);
+        Friends Friends = new Friends("Товарищи", Nature.HONEST, Situasion.TROUBLE, Status.SIMPLE, Nationality.SPANISH, 7);
+        Robin Robin = new Robin(" Я ", Nature.HONEST, Situasion.GOOD, Status.MASTER, Nationality.ENGLISH,175, 80);
 
         try {
             Hispan.Answer(Hispan.Nature.AnswerHow());
@@ -17,8 +14,8 @@ public class Main{
             System.out.println(e.getMessage());
         }
         ;
-        Friends.getName(); System.out.print(Friends.Situasion.Otvet());
-        Hispan.Think(); Friends.Pronoun(); System.out.print(Friends.Situasion.Action());Enter();
+        Friends.getName(); System.out.print(Friends.Situasion.Answer());
+        Hispan.Think(); Friends.Pronoun(); System.out.print(Friends.Situasion.Action());Speech.Enter();
 
         try {
             Hispan.Say("что, если мне угодно, то ");
@@ -27,21 +24,23 @@ public class Main{
         }
         Hispan.GoTogether("Старым индейцем ", " к ним ");
         Items Offer = new Items(" мое предложение ", " мои условия ");
-        Hispan.TakeItem(Offer);Enter();
+        Hispan.TakeItem(Offer);
+        Speech.Enter();
         Hispan.GiveItem(Offer, Friends);
         Items Answer = new Items(" ответ ", " мы согласны ");
         Hispan.TakeItem(Answer);
-        System.out.print(" если "); Friends.Pronoun(); Friends.Agree(Offer.Content());
-        Enter();
+        Speech.If();; Friends.Pronoun(); Friends.Agree(Offer.Content());
+        Speech.Enter();
         if (Answer.Content().equals(" мы согласны ")){
             Hispan.Pronoun();
             Hispan.TakeOath(Friends, Robin); Friends.Status.Will();
         }
         Items GodsGift = new Items(" религиозные атрибуты "," святыми дарами и евангелием ");
-        Enter();
-        Hispan.TakeItem(GodsGift);Enter();
+        Speech.Enter();
+        Hispan.TakeItem(GodsGift);
+        Speech.Enter();
         Hispan.Pronoun(); Hispan.ForceOath(Friends, Robin, GodsGift); Robin.Follow(Friends, "в ту христианскую землю");
-        Enter();
+        Speech.Enter();
         try {
             Hispan.Say(" что хочет сам ");
         } catch (CustomException e) {
@@ -51,12 +50,12 @@ public class Main{
         if(Robin.getAlive() || Hispan.Status.equals(Status.SIMPLE)){
             Hispan.Pronoun();
             System.out.print("не покинет меня, пока жив, или пока я сам не прогоню его");
-            System.out.print(" и ");
+            Speech.And();
             Friends.Betray(Robin);
             if(Friends.Status.equals(Status.SIMPLE)){
                 Robin.Situasion = Situasion.DANGER;
                 System.out.print(" при малейшем поползновении со стороны " + Friends.Name + " нарушить данную мне клятву ");
-                Enter();
+                Speech.Enter();
                 Hispan.ProtectMaster(Robin);
             }
         }
@@ -65,7 +64,7 @@ public class Main{
             Hispan.Betray(Robin);
         }
         else {
-            System.out.print(Robin.Name + " прогнал " + Hispan.Name + " и теперь он - Джанго освобожденный ");
+            System.out.print(Robin.Name + " прогнал " + Hispan.Name + ", теперь он - Джанго освобожденный ");
             Hispan.Betray(Robin);
         }
    }
