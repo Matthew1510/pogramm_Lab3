@@ -1,20 +1,24 @@
 package classes;
-import SetEnum.*;
 
+import SetEnum.*;
 import java.util.*;
 
-public abstract class Characters{
+public abstract class Characters {
     public Nature Nature;
     public Situasion Situasion;
     public String Name;
     public Status Status;
     public ArrayList<Items> Item;
-    private Boolean Alive = true;
+    protected Boolean Alive = true;
+    public int Height;
+    public int Weight;
+    Nationality Nationality;
 
-    public Characters(String Name, Nature Nature, Situasion Situasion, Status Status) throws RuntimeException{ //, ArrayList<Characters> ArrServants
+    public Characters(String Name, Nature Nature, Situasion Situasion, Status Status, Nationality Nationality) throws RuntimeException{ //, ArrayList<Characters> ArrServants
         this.Name = Name;
         this.Situasion = Situasion;
         this.Nature = Nature;
+        this.Nationality = Nationality;
         this.Status = Status;
         this.Item = new ArrayList<Items>();
         if(Name.equals(null)){
